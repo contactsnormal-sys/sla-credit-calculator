@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free SLA Credit Calculator – Service credits for missed SLAs | 2J LAMBRE</title>
+<meta name="description" content="Free SLA credit calculator: compute the service credit owed when SLAs are missed, using a per-breach rule or tiered compliance percentages, with a cap. Runs in your browser, no data sent.">
+<link rel="canonical" href="https://2jagency.com/sla-credit-calculator">
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:860px;margin:0 auto;padding:1rem 1.2rem;color:#172b4d;line-height:1.55}
+h1{font-size:1.8rem}fieldset{border:1px solid #dfe1e6;border-radius:8px;margin:1rem 0;padding:1rem}
+label{display:block;margin:.5rem 0 .15rem;font-weight:600}input,select{padding:.45rem;width:100%;max-width:320px;box-sizing:border-box}
+table{border-collapse:collapse;margin:.5rem 0}td,th{border:1px solid #dfe1e6;padding:.3rem .5rem}
+#result{background:#f4f5f7;border-radius:8px;padding:1rem;font-size:1.05rem}#result strong{font-size:1.4rem}
+.err{color:#bf2600}.muted{color:#5e6c84;font-size:.9rem}code{background:#f4f5f7;padding:0 .25rem}
+</style>
+</head>
+<body>
+<h1>SLA credit calculator</h1>
+<p>Work out the service credit (refund or penalty) owed to a customer when an SLA is missed. Everything runs in your browser; nothing is sent anywhere.</p>
+
+<form id="calc" onsubmit="return false">
+<fieldset><legend>Period data</legend>
+<label for="fee">Monthly fee for the service (in your currency)</label><input id="fee" type="number" min="0" step="0.01" value="10000">
+<label for="total">SLA cycles (tickets) measured in the period</label><input id="total" type="number" min="0" step="1" value="400">
+<label for="breached">Breached SLA cycles</label><input id="breached" type="number" min="0" step="1" value="28">
+<label for="excluded">Breached cycles excluded (customer-caused, force majeure…)</label><input id="excluded" type="number" min="0" step="1" value="4">
+</fieldset>
+<fieldset><legend>Contract rule</legend>
+<label for="mode">Credit method</label>
+<select id="mode"><option value="tiered">Tiered % of monthly fee by compliance</option><option value="perBreach">Fixed amount per breached cycle</option></select>
+<div id="perBreachBox"><label for="perBreach">Credit per counted breach</label><input id="perBreach" type="number" min="0" step="0.01" value="50"></div>
+<div id="tierBox">
+<p class="muted">Compliance below the threshold earns the credit %. The lowest matching threshold wins.</p>
+<table><tr><th>Compliance below (%)</th><th>Credit (% of fee)</th></tr>
+<tr><td><input id="t1" type="number" value="99"></td><td><input id="c1" type="number" value="5"></td></tr>
+<tr><td><input id="t2" type="number" value="95"></td><td><input id="c2" type="number" value="10"></td></tr>
+<tr><td><input id="t3" type="number" value="90"></td><td><input id="c3" type="number" value="25"></td></tr>
+</table></div>
+<label for="cap">Cap (% of monthly fee, 0 = no cap)</label><input id="cap" type="number" min="0" step="0.1" value="20">
+</fieldset>
+</form>
+<div id="result" aria-live="polite"></div>
+
+<h2>How the calculation works</h2>
+<p><code>counted breaches = breached − excluded</code><br>
+<code>compliance % = (total − counted breaches) / total × 100</code> (excluded cycles count as met)<br>
+Per-breach rule: <code>credit = counted breaches × amount per breach</code><br>
+Tiered rule: <code>credit = fee × tier % / 100</code><br>
+Then <code>credit = min(credit, fee × cap % / 100)</code>, rounded half-up to the cent.</p>
+<p>Example with the defaults: 28 − 4 = 24 counted breaches, compliance = 376/400 = 94.00 %, which is below 95 % → 10 % tier → 1,000.00; cap 20 % = 2,000.00, so the credit is <strong>1,000.00</strong>.</p>
+<h2>FAQ</h2>
+<p><strong>What is an SLA credit?</strong> A contractual reduction of the fee when the provider misses agreed service levels.</p>
+<p><strong>Should excluded cycles reduce the total?</strong> Contracts differ. This calculator treats them as met; check your contract wording.</p>
+<p class="muted">Made by 2J LAMBRE (contact@2jagency.com). We are building SLA Credit Lab, a Jira Service Management app that does this from your real SLA data; it is pending Atlassian Marketplace approval. This calculator is free and stands alone. Not legal or financial advice.</p>
+
+<script>
+function round2(x){return Math.sign(x)*Math.round(Math.abs(x)*100+1e-9)/100;}
+function computeCredit(p){
+  var errors=[];
+  ['fee','total','breached','excluded','cap'].forEach(function(k){if(!(isFinite(p[k])&&p[k]>=0))errors.push(k+' must be a number ≥ 0');});
+  if(errors.length)return {errors:errors};
+  if(p.excluded>p.breached)errors.push('Excluded cannot exceed breached');
+  if(p.breached>p.total)errors.push('Breached cannot exceed total cycles');
+  if(p.total===0)errors.push('Total cycles must be greater than 0');
+  if(errors.length)return {errors:errors};
+  var counted=p.breached-p.excluded;
+  var compliance=(p.total-counted)/p.total*100;
+  var raw=0,tier=null;
+  if(p.mode==='perBreach'){
+    if(!(isFinite(p.perBreach)&&p.perBreach>=0))return {errors:['Amount per breach must be ≥ 0']};
+    raw=counted*p.perBreach;
+  }else{
+    (p.tiers||[]).filter(function(t){return isFinite(t.below)&&isFinite(t.credit);})
+      .sort(function(a,b){return a.below-b.below;})
+      .some(function(t){if(compliance<t.below){tier=t;return true;}return false;});
+    raw=tier?p.fee*tier.credit/100:0;
+  }
+  var capAmt=p.cap>0?p.fee*p.cap/100:Infinity;
+  var capped=raw>capAmt;
+  return {errors:[],counted:counted,compliance:Math.round(compliance*100)/100,tier:tier,raw:round2(raw),capped:capped,credit:round2(Math.min(raw,capAmt))};
+}
+if(typeof module!=='undefined')module.exports={computeCredit:computeCredit,round2:round2};
+if(typeof document!=='undefined'){
+  var $=function(id){return document.getElementById(id);};
+  var num=function(id){var v=$(id).value;return v===''?NaN:Number(v);};
+  var fmt=function(x){return x.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});};
+  function update(){
+    var mode=$('mode').value;
+    $('perBreachBox').style.display=mode==='perBreach'?'':'none';
+    $('tierBox').style.display=mode==='tiered'?'':'none';
+    var r=computeCredit({fee:num('fee'),total:num('total'),breached:num('breached'),excluded:num('excluded'),cap:num('cap'),mode:mode,perBreach:num('perBreach'),
+      tiers:[1,2,3].map(function(i){return {below:num('t'+i),credit:num('c'+i)};})});
+    if(r.errors.length){$('result').innerHTML='<span class="err">'+r.errors.join('<br>')+'</span>';return;}
+    $('result').innerHTML='Counted breaches: '+r.counted+' · Compliance: '+r.compliance.toFixed(2)+' %'+
+      (mode==='tiered'?' · Tier: '+(r.tier?'below '+r.tier.below+' % → '+r.tier.credit+' %':'none'):'')+
+      '<br>Credit before cap: '+fmt(r.raw)+(r.capped?' (capped)':'')+'<br>SLA credit owed: <strong id="credit">'+fmt(r.credit)+'</strong>';
+  }
+  document.addEventListener('input',update);document.addEventListener('change',update);update();
+}
+</script>
+</body>
+</html>
