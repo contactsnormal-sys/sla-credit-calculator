@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://contactsnormal-sys.github.io/sla-credit-calculator/sitemap.xml
+Sitemap: https://sla.2jagency.com/sitemap.xml
