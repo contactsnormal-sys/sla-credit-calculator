@@ -53,7 +53,18 @@ Then <code>credit = min(credit, fee × cap % / 100)</code>, rounded half-up to t
 <h2>FAQ</h2>
 <p><strong>What is an SLA credit?</strong> A contractual reduction of the fee when the provider misses agreed service levels.</p>
 <p><strong>Should excluded cycles reduce the total?</strong> Contracts differ. This calculator treats them as met; check your contract wording.</p>
-<p class="muted">Made by 2J LAMBRE (contact@2jagency.com). We are building SLA Credit Lab, a Jira Service Management app that does this from your real SLA data; it is pending Atlassian Marketplace approval. This calculator is free and stands alone. Not legal or financial advice.</p>
+<h2 id="audit">SLA audit – €149</h2>
+<p>Prefer a second pair of eyes? We review your SLA credit terms and the figures you send us, by hand.</p>
+<ul>
+<li><strong>You send:</strong> the SLA credit clause(s) of one contract and one month of SLA results (counts of met, breached and excluded cycles, or an export).</li>
+<li><strong>You get:</strong> a written report (PDF) with the credit owed under each clause, the calculation step by step, the assumptions we made and the ambiguous points to check with your counterpart.</li>
+<li><strong>Delivery:</strong> within 5 business days of receiving complete inputs.</li>
+<li><strong>Price:</strong> €149, one-off. No subscription.</li>
+</ul>
+<p><!-- TODO: add Stripe Payment Link once created --><strong>To order:</strong> email <a href="mailto:contact@2jagency.com?subject=SLA%20audit">contact@2jagency.com</a> with the subject "SLA audit". The audit is an arithmetic review of the contract wording you provide, not legal advice.</p>
+
+<p class="muted">Made by 2J LAMBRE (contact@2jagency.com). We are also building SLA Credit Lab, a Jira Service Management app that will do this from your real SLA data; it is not yet available on the Atlassian Marketplace. This calculator is free and stands alone. Not legal or financial advice.</p>
+<footer class="muted" style="border-top:1px solid #dfe1e6;margin-top:2rem;padding-top:.8rem">© 2026 2J LAMBRE · <a href="legal.html">Legal notice / Mentions légales</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms (CGV)</a> · <a href="mailto:contact@2jagency.com">contact@2jagency.com</a></footer>
 
 <script>
 function round2(x){return Math.sign(x)*Math.round(Math.abs(x)*100+1e-9)/100;}
