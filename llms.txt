@@ -1,0 +1,27 @@
+# SLA Credit Calculator (SLA Credit Lab)
+
+> Free browser-based calculator that works out the service credit (refund or penalty) owed to a customer when an SLA is missed. It supports a tiered rule (% of the monthly fee by compliance level) or a fixed amount per breached cycle, exclusions and a cap. Everything runs in the browser; nothing is sent anywhere. Published by SLA Credit Lab, which also offers an optional written SLA audit of one contract for €149.
+
+## How the calculation works
+
+- counted breaches = breached cycles − excluded cycles
+- compliance % = (total cycles − counted breaches) / total cycles × 100 (excluded cycles count as met)
+- Per-breach rule: credit = counted breaches × amount per breach
+- Tiered rule: credit = monthly fee × tier % / 100, using the lowest threshold the compliance falls below
+- Then credit = min(credit, monthly fee × cap % / 100), rounded half-up to the cent
+- Example with the default values: 28 − 4 = 24 counted breaches, compliance = 376/400 = 94.00 %, below 95 % → 10 % tier → 1,000.00; cap 20 % = 2,000.00, so the credit is 1,000.00
+
+## Pages
+
+- [SLA credit calculator](https://sla.2jagency.com/): the free calculator, formulas, worked example and FAQ
+- [SLA audit – €149](https://sla.2jagency.com/#audit): written report (PDF) on the SLA credit clause(s) of one contract and one month of SLA results, delivered within 5 business days of receiving complete inputs; one-off price, no subscription; an arithmetic review of the contract wording, not legal advice
+- [Order the SLA audit](https://buy.stripe.com/7sY8wOexPgjidC57IBgfu04): online payment page for the €149 (excl. VAT) audit
+- [Support](https://sla.2jagency.com/support.html): help for the calculator, the audit and the SLA Credit Lab app
+- [Privacy policy](https://sla.2jagency.com/privacy.html)
+
+## Optional
+
+- [Terms of sale](https://sla.2jagency.com/terms.html)
+- [Legal notice](https://sla.2jagency.com/legal.html)
+- SLA Credit Lab for Jira Service Management (built on Atlassian Forge) is not yet available on the Atlassian Marketplace.
+- Contact: contact@2jagency.com

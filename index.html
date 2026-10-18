@@ -62,6 +62,62 @@
  ]
 }
 </script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What is an SLA credit?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "A contractual reduction of the fee when the provider misses agreed service levels."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Should excluded cycles reduce the total?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Contracts differ. This calculator treats them as met; check your contract wording."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How is the SLA credit calculated?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Counted breaches = breached − excluded. Compliance % = (total − counted breaches) / total × 100 (excluded cycles count as met). Per-breach rule: credit = counted breaches × amount per breach. Tiered rule: credit = fee × tier % / 100. Then credit = min(credit, fee × cap % / 100), rounded half-up to the cent."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is my data sent anywhere?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. Everything runs in your browser; nothing is sent anywhere. The calculator is free and stands alone."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What does the €149 SLA audit include?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "You send the SLA credit clause(s) of one contract and one month of SLA results. You get a written report (PDF) with the credit owed under each clause, the calculation step by step, the assumptions made and the ambiguous points to check with your counterpart, within 5 business days of receiving complete inputs. Price: €149, one-off, no subscription. The audit is an arithmetic review of the contract wording you provide, not legal advice."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is SLA Credit Lab available for Jira Service Management?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "SLA Credit Lab is a Jira Service Management app (built on Atlassian Forge) that will compute credits from your real SLA data, per customer and per month. It is not yet available on the Atlassian Marketplace."
+   }
+  }
+ ]
+}
+</script>
 <style>
 body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:860px;margin:0 auto;padding:1rem 1.2rem;color:#172b4d;line-height:1.55}
 h1{font-size:1.8rem}fieldset{border:1px solid #dfe1e6;border-radius:8px;margin:1rem 0;padding:1rem}
