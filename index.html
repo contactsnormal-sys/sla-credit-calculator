@@ -4,22 +4,78 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google-site-verification" content="V9hLdpiZgG9RZz1bHXvRV7cZSdc5ljmKQsxpwJYmrLc" />
-<title>Free SLA Credit Calculator – Service credits for missed SLAs | 2J LAMBRE</title>
-<meta name="description" content="Free SLA credit calculator: compute the service credit owed when SLAs are missed, using a per-breach rule or tiered compliance percentages, with a cap. Runs in your browser, no data sent.">
-<link rel="canonical" href="https://2jagency.com/sla-credit-calculator">
+<title>SLA Credit Calculator (Free) – Work Out Service Credits for Missed SLAs</title>
+<meta name="description" content="Free SLA credit calculator: enter your monthly fee, met and breached SLA cycles and contract tiers to get the service credit owed, with caps and exclusions. Runs in your browser. Optional €149 SLA audit.">
+<link rel="canonical" href="https://contactsnormal-sys.github.io/sla-credit-calculator/">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "SoftwareApplication",
+ "name": "SLA Credit Calculator",
+ "applicationCategory": "BusinessApplication",
+ "operatingSystem": "Web browser",
+ "url": "https://contactsnormal-sys.github.io/sla-credit-calculator/",
+ "description": "Free browser-based calculator for SLA service credits (tiered or per-breach rules, exclusions, cap).",
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "EUR"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "2J LAMBRE",
+  "email": "contact@2jagency.com"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to calculate an SLA service credit",
+ "description": "Compute the service credit owed when SLA targets are missed, using a tiered or per-breach contract rule with a cap.",
+ "step": [
+  {
+   "@type": "HowToStep",
+   "position": 1,
+   "name": "Enter the period data",
+   "text": "Enter the monthly fee, the number of SLA cycles measured, the breached cycles and the breached cycles excluded by the contract."
+  },
+  {
+   "@type": "HowToStep",
+   "position": 2,
+   "name": "Count the breaches",
+   "text": "Counted breaches = breached cycles minus excluded cycles. Compliance % = (total − counted breaches) / total × 100."
+  },
+  {
+   "@type": "HowToStep",
+   "position": 3,
+   "name": "Apply the contract rule",
+   "text": "Tiered rule: credit = fee × tier % for the lowest threshold the compliance falls below. Per-breach rule: credit = counted breaches × amount per breach."
+  },
+  {
+   "@type": "HowToStep",
+   "position": 4,
+   "name": "Apply the cap",
+   "text": "Credit = min(credit, fee × cap %), rounded half-up to the cent."
+  }
+ ]
+}
+</script>
 <style>
 body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:860px;margin:0 auto;padding:1rem 1.2rem;color:#172b4d;line-height:1.55}
 h1{font-size:1.8rem}fieldset{border:1px solid #dfe1e6;border-radius:8px;margin:1rem 0;padding:1rem}
 label{display:block;margin:.5rem 0 .15rem;font-weight:600}input,select{padding:.45rem;width:100%;max-width:320px;box-sizing:border-box}
 table{border-collapse:collapse;margin:.5rem 0}td,th{border:1px solid #dfe1e6;padding:.3rem .5rem}
 #result{background:#f4f5f7;border-radius:8px;padding:1rem;font-size:1.05rem}#result strong{font-size:1.4rem}
-.err{color:#bf2600}.muted{color:#5e6c84;font-size:.9rem}code{background:#f4f5f7;padding:0 .25rem}
+.cta{display:inline-block;background:#0052cc;color:#fff;padding:.6rem 1rem;border-radius:6px;text-decoration:none;font-weight:600}.cta.alt{background:#fff;color:#0052cc;border:2px solid #0052cc}.box{border:2px solid #0052cc;border-radius:8px;padding:1rem;margin:1rem 0;background:#f4f8ff}.err{color:#bf2600}.muted{color:#5e6c84;font-size:.9rem}code{background:#f4f5f7;padding:0 .25rem}
 </style>
 </head>
 <body>
 <h1>SLA credit calculator</h1>
 <p>Work out the service credit (refund or penalty) owed to a customer when an SLA is missed. Everything runs in your browser; nothing is sent anywhere.</p>
 
+<div class="box"><strong>Not sure your contract is applied correctly?</strong> Get a written SLA audit of one contract for <strong>€149</strong>, delivered within 5 business days. <a class="cta" href="#audit">See the €149 SLA audit</a></div>
 <form id="calc" onsubmit="return false">
 <fieldset><legend>Period data</legend>
 <label for="fee">Monthly fee for the service (in your currency)</label><input id="fee" type="number" min="0" step="0.01" value="10000">
@@ -53,6 +109,9 @@ Then <code>credit = min(credit, fee × cap % / 100)</code>, rounded half-up to t
 <h2>FAQ</h2>
 <p><strong>What is an SLA credit?</strong> A contractual reduction of the fee when the provider misses agreed service levels.</p>
 <p><strong>Should excluded cycles reduce the total?</strong> Contracts differ. This calculator treats them as met; check your contract wording.</p>
+<h2 id="jira">Need it inside Jira?</h2>
+<div class="box"><p>SLA Credit Lab is our Jira Service Management app (built on Atlassian Forge) that will compute credits from your real SLA data, per customer and per month. It is <strong>not yet available</strong> on the Atlassian Marketplace.</p>
+<p><a class="cta alt" href="mailto:contact@2jagency.com?subject=Notify%20me%3A%20SLA%20Credit%20Lab%20for%20Jira">Coming to the Atlassian Marketplace – get notified</a></p></div>
 <h2 id="audit">SLA audit – €149</h2>
 <p>Prefer a second pair of eyes? We review your SLA credit terms and the figures you send us, by hand.</p>
 <ul>
@@ -61,10 +120,11 @@ Then <code>credit = min(credit, fee × cap % / 100)</code>, rounded half-up to t
 <li><strong>Delivery:</strong> within 5 business days of receiving complete inputs.</li>
 <li><strong>Price:</strong> €149, one-off. No subscription.</li>
 </ul>
-<p><!-- TODO: add Stripe Payment Link once created --><strong>To order:</strong> email <a href="mailto:contact@2jagency.com?subject=SLA%20audit">contact@2jagency.com</a> with the subject "SLA audit". The audit is an arithmetic review of the contract wording you provide, not legal advice.</p>
+<p><!-- TODO: add Stripe Payment Link once created --><strong>To order:</strong> email <a href="mailto:contact@2jagency.com?subject=SLA%20audit">contact@2jagency.com</a> with the subject "SLA audit".</p>
+<p><a class="cta" href="mailto:contact@2jagency.com?subject=SLA%20audit">Order the €149 SLA audit</a></p><p class="muted"> The audit is an arithmetic review of the contract wording you provide, not legal advice.</p>
 
 <p class="muted">Made by 2J LAMBRE (contact@2jagency.com). We are also building SLA Credit Lab, a Jira Service Management app that will do this from your real SLA data; it is not yet available on the Atlassian Marketplace. This calculator is free and stands alone. Not legal or financial advice.</p>
-<footer class="muted" style="border-top:1px solid #dfe1e6;margin-top:2rem;padding-top:.8rem">© 2026 2J LAMBRE · <a href="legal.html">Legal notice / Mentions légales</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms (CGV)</a> · <a href="mailto:contact@2jagency.com">contact@2jagency.com</a></footer>
+<footer class="muted" style="border-top:1px solid #dfe1e6;margin-top:2rem;padding-top:.8rem">© 2026 2J LAMBRE · <a href="legal.html">Legal notice / Mentions légales</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms (CGV)</a> · <a href="support.html">Support</a> · <a href="mailto:contact@2jagency.com">contact@2jagency.com</a></footer>
 
 <script>
 function round2(x){return Math.sign(x)*Math.round(Math.abs(x)*100+1e-9)/100;}
