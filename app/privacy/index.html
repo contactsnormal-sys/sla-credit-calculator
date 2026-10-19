@@ -21,29 +21,29 @@
 <body>
   <p><a href="/">← SLA Credit Lab</a> · <a href="/app/support">Support</a></p>
   <h1>Privacy</h1>
-  <p class="muted">Privacy notice for the Marketplace candidate of SLA Credit Lab · updated 18 October 2026.</p>
+  <p class="muted">Privacy notice for the Marketplace candidate of SLA Credit Lab · Last updated: 19 October 2026.</p>
 
-  <p class="notice"><strong>Controller for this notice:</strong> 2J LAMBRE, a French simplified joint-stock company (SASU), SIREN 837 878 925, 10 rue de Penthièvre, 75008 Paris, France. Postal contact is available at that address. Trade name: SLA Credit Lab.</p>
+  <p class="notice"><strong>Controller for this notice:</strong> 2J LAMBRE, a French simplified joint-stock company (SASU), SIREN 837 878 925, 10 rue de Penthièvre, 75008 Paris, France. Postal contact is available at that address. Trade name: SLA Credit Lab. Security and privacy contact: <a href="mailto:contact@2jagency.com">contact@2jagency.com</a>.</p>
 
-  <h2>Purpose and personal data</h2>
-  <p>SLA Credit Lab prepares an SLA-credit calculation and its internal review. The app processes contract and customer references, rules and amounts, ticket keys, SLA cycles, the owner's Atlassian account ID, the label entered by an approver, and the approval date.</p>
+  <h2>What SLA Credit Lab processes</h2>
+  <p>SLA Credit Lab is an Atlassian Forge app for Jira Service Management. It prepares an SLA-credit calculation and its internal review. It does not issue an accounting credit, payment, or Jira change.</p>
+  <p>When a Jira admin saves a contract rule, the app stores that rule with the admin's Atlassian account ID and the date. When a user approves a credit on a Jira Service Management request, the app stores the issue key, the amount, the approver's Atlassian account ID and the date. To compute a credit, the app reads the SLA cycles of the current request through Jira's API, with the permissions of the person viewing it; SLA data is not copied into storage.</p>
   <p>Free-text fields may contain personal data. Use references instead of names where possible. Never enter passwords, bank details, or sensitive personal data.</p>
-  <p>Entries, proposals, and receipts are stored in Forge hosted storage (KVS). A server-side secret key checks their integrity. Contract text stays inside the Forge app and is not sent to any external language service. The app does not issue an accounting credit, payment, or Jira change.</p>
+
+  <h2>Where data is stored</h2>
+  <p>Data is stored only in Atlassian Forge hosted storage, hosted by Atlassian. The app sends no data outside Atlassian, uses no external server, analytics or advertising tool, and writes no logs. The reviewed candidate declares no external fetch (egress), remote service, or web trigger. The app requests three Forge scopes: <code>read:request.sla:jira-service-management</code>, <code>storage:app</code>, and <code>report:personal-data</code>.</p>
 
   <h2>Access and recipients</h2>
-  <p>Access to a case is limited to its owner account and installation. This control has been tested between two sites under the same account; a test with a separate real account remains required before customer data is processed.</p>
-  <p>The app uses Atlassian Forge and Jira, including the Personal Data Reporting API to report retained account IDs. The reviewed candidate declares no external server, remote service, web trigger, advertising tool, or marketing analytics tool.</p>
+  <p>Access to stored rules and approvals is limited to the installation. The app uses Atlassian Forge and Jira, including the Personal Data Reporting API to report retained Atlassian account IDs weekly.</p>
 
-  <h2>Retention</h2>
-  <p>App access expires thirty minutes after calculation and a corresponding TTL is requested for Forge storage. This does not guarantee physical deletion at an exact second and does not describe Atlassian backups.</p>
-  <p>A minimal privacy index — account ID, reference, and dates — has a maximum eight-day TTL to support periodic reporting. Users remain responsible for any exports they copy or download.</p>
+  <h2>Retention and deletion</h2>
+  <p>Data stays in your site until the app is uninstalled. Account IDs are reported to Atlassian weekly and replaced by "erased" when Atlassian reports an account as closed. Users remain responsible for any exports they copy or download.</p>
 
   <h2>Your rights</h2>
   <p>The customer organisation determines the purposes, access, notices to individuals, and legal basis for data relating to its teams and customers. The contractual qualification of 2J LAMBRE as processor for this flow must be formalised in a data-processing agreement.</p>
   <p>To request access, rectification, erasure, restriction, or objection, contact <a href="mailto:contact@2jagency.com">contact@2jagency.com</a> or write to the registered office above. We may ask only for information necessary to link the request to the relevant Atlassian account and installation. You may also contact the competent supervisory authority (in France: CNIL, www.cnil.fr).</p>
 
   <h2>Security and limits</h2>
-  <p>Server-side controls cover ownership, licence, integrity, and expiry. The privacy worker logs its status and aggregate counters only; it does not log an account ID or case reference.</p>
   <p>The app makes no certification or EU-only data-residency claim. Sub-processors, transfers, effective regions, and support access must be checked against the applicable Atlassian contracts and settings.</p>
 
   <h2>Technical sources</h2>
@@ -52,7 +52,7 @@
     <li><a href="https://developer.atlassian.com/platform/forge/storage-reference/hosted-storage-data-lifecycle/">Hosted storage data lifecycle</a></li>
     <li><a href="https://developer.atlassian.com/platform/forge/faq-privacy-security/">Forge privacy and security FAQ</a></li>
   </ul>
-  <p class="muted">This notice describes the observed processing in the Marketplace candidate. It is not a general compliance certification.</p>
+  <p class="muted">This notice describes the observed processing in the Marketplace candidate (Forge app v4). It is not a general compliance certification.</p>
 
   <footer class="muted">© 2026 SLA Credit Lab · Published by <a href="https://2jagency.com/" rel="noopener">2J LAMBRE SASU</a> · SIREN 837 878 925 · Paris, France · <a href="/app/support">Support</a> · <a href="mailto:contact@2jagency.com">contact@2jagency.com</a></footer>
 </body>
