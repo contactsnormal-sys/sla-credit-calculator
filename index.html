@@ -90,6 +90,14 @@
   },
   {
    "@type": "Question",
+   "name": "What are service level credits?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Service level credits are the same as SLA credits: a contractual reduction of the fee owed by a provider when agreed service levels are missed. Contracts usually express them as a percentage of the monthly fee that grows as compliance drops, or as a fixed amount per breach, often with a cap."
+   }
+  },
+  {
+   "@type": "Question",
    "name": "Should excluded cycles reduce the total?",
    "acceptedAnswer": {
     "@type": "Answer",
@@ -102,6 +110,14 @@
    "acceptedAnswer": {
     "@type": "Answer",
     "text": "Counted breaches = breached − excluded. Compliance % = (total − counted breaches) / total × 100 (excluded cycles count as met). Per-breach rule: credit = counted breaches × amount per breach. Tiered rule: credit = fee × tier % / 100. Then credit = min(credit, fee × cap % / 100), rounded half-up to the cent."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I calculate an SLA breach penalty in Jira Service Management?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Export or read the met and breached SLA counts for the period from your Jira Service Management SLA report. Enter the monthly fee, total cycles, breached cycles and any excluded breaches into the free calculator on this page, then apply your contract rule (tiered percentage or amount per breach) and the credit cap. The result is the service credit or breach penalty owed for that period."
    }
   },
   {
@@ -125,7 +141,15 @@
    "name": "Is SLA Credit Lab available for Jira Service Management?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "SLA Credit Lab is a Jira Service Management app (built on Atlassian Forge) that will compute credits from your real SLA data, per customer and per month. It is not yet available on the Atlassian Marketplace."
+    "text": "SLA Credit Lab for Jira Service Management is submitted to the Atlassian Marketplace and is awaiting approval. Until it is listed, the free calculator on this page and the €149 written SLA audit are available now."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is there a Jira app that calculates SLA credits?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "SLA Credit Lab for Jira Service Management is submitted to the Atlassian Marketplace. Until it is listed, the free calculator on this page and the €149 written SLA audit are available now."
    }
   }
  ]
@@ -168,7 +192,7 @@ table{border-collapse:collapse;margin:.5rem 0}td,th{border:1px solid #dfe1e6;pad
 </form>
 <div id="result" aria-live="polite"></div>
 
-<h2>How the SLA credit calculation works</h2>
+<h2>SLA service credit formula</h2>
 <p><code>counted breaches = breached − excluded</code><br>
 <code>compliance % = (total − counted breaches) / total × 100</code> (excluded cycles count as met)<br>
 Per-breach rule: <code>credit = counted breaches × amount per breach</code><br>
@@ -188,9 +212,16 @@ Then <code>credit = min(credit, fee × cap % / 100)</code>, rounded half-up to t
 <p>Two points cause most disagreements: whether excluded breaches are removed from the total or counted as met (this calculator counts them as met), and how amounts are rounded. Read your clause on both before sending a figure to a customer or a provider. If you work in Jira Service Management, the SLA report gives you the met and breached counts per month to enter above. For the conditions set out in your own contract, see the <a href="#audit">€149 SLA audit</a>; for questions, visit <a href="/app/support/">support</a>.</p>
 <h2>FAQ</h2>
 <p><strong>What is an SLA credit?</strong> A contractual reduction of the fee when the provider misses agreed service levels.</p>
+<p><strong>What are service level credits?</strong> Service level credits are the same as SLA credits: a contractual reduction of the fee owed by a provider when agreed service levels are missed. Contracts usually express them as a percentage of the monthly fee that grows as compliance drops, or as a fixed amount per breach, often with a cap.</p>
 <p><strong>Should excluded cycles reduce the total?</strong> Contracts differ. This calculator treats them as met; check your contract wording.</p>
+<p><strong>How is the SLA credit calculated?</strong> Counted breaches = breached − excluded. Compliance % = (total − counted breaches) / total × 100 (excluded cycles count as met). Per-breach rule: credit = counted breaches × amount per breach. Tiered rule: credit = fee × tier % / 100. Then credit = min(credit, fee × cap % / 100), rounded half-up to the cent.</p>
+<p><strong>How do I calculate an SLA breach penalty in Jira Service Management?</strong> Export or read the met and breached SLA counts for the period from your Jira Service Management SLA report. Enter the monthly fee, total cycles, breached cycles and any excluded breaches into the free calculator on this page, then apply your contract rule (tiered percentage or amount per breach) and the credit cap. The result is the service credit or breach penalty owed for that period.</p>
+<p><strong>Is my data sent anywhere?</strong> No. Everything runs in your browser; nothing is sent anywhere. The calculator is free and stands alone.</p>
+<p><strong>What does the €149 SLA audit include?</strong> You send the SLA credit clause(s) of one contract and one month of SLA results. You get a written report (PDF) with the credit owed under each clause, the calculation step by step, the assumptions made and the ambiguous points to check with your counterpart, within 5 business days of receiving complete inputs. Price: €149, one-off, no subscription. The audit is an arithmetic review of the contract wording you provide, not legal advice.</p>
+<p><strong>Is SLA Credit Lab available for Jira Service Management?</strong> SLA Credit Lab for Jira Service Management is submitted to the Atlassian Marketplace and is awaiting approval. Until it is listed, the free calculator on this page and the €149 written SLA audit are available now.</p>
+<p><strong>Is there a Jira app that calculates SLA credits?</strong> SLA Credit Lab for Jira Service Management is submitted to the Atlassian Marketplace. Until it is listed, the free calculator on this page and the €149 written SLA audit are available now.</p>
 <h2 id="jira">Need it inside Jira?</h2>
-<div class="box"><p>SLA Credit Lab is our Jira Service Management app (built on Atlassian Forge) that will compute credits from your real SLA data, per customer and per month. It is <strong>not yet available</strong> on the Atlassian Marketplace.</p>
+<div class="box"><p>SLA Credit Lab is our Jira Service Management app (built on Atlassian Forge) that will compute credits from your real SLA data, per customer and per month. It is <strong>submitted to the Atlassian Marketplace</strong> and awaiting approval. Until it is listed, the free calculator above and the €149 audit are available now.</p>
 <p><a class="cta alt" href="mailto:contact@2jagency.com?subject=Notify%20me%3A%20SLA%20Credit%20Lab%20for%20Jira">Coming to the Atlassian Marketplace – get notified</a></p></div>
 <h2 id="audit">SLA audit – €149</h2>
 <p>Prefer a second pair of eyes? We review your SLA credit terms and the figures you send us, by hand.</p>
@@ -203,7 +234,7 @@ Then <code>credit = min(credit, fee × cap % / 100)</code>, rounded half-up to t
 <p><strong>To order:</strong> pay online (button below), or email <a href="mailto:contact@2jagency.com?subject=SLA%20audit">contact@2jagency.com</a> with the subject "SLA audit".</p>
 <p><a class="cta" href="https://buy.stripe.com/7sY8wOexPgjidC57IBgfu04">Buy the audit – €149 excl. VAT</a> <a class="cta alt" href="mailto:contact@2jagency.com?subject=SLA%20audit">Or email us</a></p><p class="muted"> The audit is an arithmetic review of the contract wording you provide, not legal advice.</p>
 
-<p class="muted">Made by SLA Credit Lab (contact@2jagency.com). We are also building SLA Credit Lab, a Jira Service Management app that will do this from your real SLA data; it is not yet available on the Atlassian Marketplace. This calculator is free and stands alone. Not legal or financial advice.</p>
+<p class="muted">Made by SLA Credit Lab (contact@2jagency.com). We are also building SLA Credit Lab, a Jira Service Management app that will do this from your real SLA data; it is submitted to the Atlassian Marketplace and awaiting approval. This calculator is free and stands alone. Not legal or financial advice.</p>
 <footer class="muted" style="border-top:1px solid #dfe1e6;margin-top:2rem;padding-top:.8rem">© 2026 SLA Credit Lab · Published by <a href="https://2jagency.com/" rel="noopener">2J LAMBRE SASU</a> · <a href="legal.html">Legal notice / Mentions légales</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms (CGV)</a> · <a href="support.html">Support</a> · <a href="/app/privacy/">App privacy policy</a> · <a href="/app/support/">App support</a> · <a href="mailto:contact@2jagency.com">contact@2jagency.com</a></footer>
 
 <script>
