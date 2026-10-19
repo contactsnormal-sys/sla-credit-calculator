@@ -4,9 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google-site-verification" content="V9hLdpiZgG9RZz1bHXvRV7cZSdc5ljmKQsxpwJYmrLc" />
-<title>SLA Credit Calculator (Free) – Work Out Service Credits for Missed SLAs</title>
-<meta name="description" content="Free SLA credit calculator: enter your monthly fee, met and breached SLA cycles and contract tiers to get the service credit owed, with caps and exclusions. Runs in your browser. Optional €149 SLA audit.">
+<title>SLA Credit Calculator – Free Service Credit Calculation</title>
+<meta name="description" content="Work out the SLA service credit owed for missed SLAs: tiered or per-breach rules, exclusions and cap. Free, in your browser, with a worked example.">
+<meta name="robots" content="index,follow">
 <link rel="canonical" href="https://sla.2jagency.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SLA Credit Lab">
+<meta property="og:title" content="SLA Credit Calculator – Free Service Credit Calculation">
+<meta property="og:description" content="Work out the SLA service credit owed for missed SLAs: tiered or per-breach rules, exclusions and cap. Free, runs in your browser.">
+<meta property="og:url" content="https://sla.2jagency.com/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SLA Credit Calculator – Free Service Credit Calculation">
+<meta name="twitter:description" content="Work out the SLA service credit owed for missed SLAs: tiered or per-breach rules, exclusions and cap. Free, runs in your browser.">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -16,6 +26,9 @@
  "operatingSystem": "Web browser",
  "url": "https://sla.2jagency.com/",
  "description": "Free browser-based calculator for SLA service credits (tiered or per-breach rules, exclusions, cap).",
+ "featureList": ["Tiered service credit by SLA compliance", "Fixed credit per breached SLA cycle", "Excluded breaches", "Credit cap as % of monthly fee"],
+ "inLanguage": "en",
+ "isAccessibleForFree": true,
  "offers": {
   "@type": "Offer",
   "price": "0",
@@ -128,7 +141,7 @@ table{border-collapse:collapse;margin:.5rem 0}td,th{border:1px solid #dfe1e6;pad
 </style>
 </head>
 <body>
-<h1>SLA credit calculator</h1>
+<h1>SLA credit calculator: work out the service credit owed</h1>
 <p>Work out the service credit (refund or penalty) owed to a customer when an SLA is missed. Everything runs in your browser; nothing is sent anywhere.</p>
 
 <div class="box"><strong>Not sure your contract is applied correctly?</strong> Get a written SLA audit of one contract for <strong>€149</strong>, delivered within 5 business days. <a class="cta" href="#audit">See the €149 SLA audit</a></div>
@@ -155,13 +168,24 @@ table{border-collapse:collapse;margin:.5rem 0}td,th{border:1px solid #dfe1e6;pad
 </form>
 <div id="result" aria-live="polite"></div>
 
-<h2>How the calculation works</h2>
+<h2>How the SLA credit calculation works</h2>
 <p><code>counted breaches = breached − excluded</code><br>
 <code>compliance % = (total − counted breaches) / total × 100</code> (excluded cycles count as met)<br>
 Per-breach rule: <code>credit = counted breaches × amount per breach</code><br>
 Tiered rule: <code>credit = fee × tier % / 100</code><br>
 Then <code>credit = min(credit, fee × cap % / 100)</code>, rounded half-up to the cent.</p>
 <p>Example with the defaults: 28 − 4 = 24 counted breaches, compliance = 376/400 = 94.00 %, which is below 95 % → 10 % tier → 1,000.00; cap 20 % = 2,000.00, so the credit is <strong>1,000.00</strong>.</p>
+<h2 id="guide">How to calculate SLA service credits, step by step</h2>
+<p>An SLA (service level agreement) credit, also called a service credit or SLA penalty, is the reduction of the fee that a provider owes its customer when agreed service levels are missed. Most contracts express it in one of two ways: a percentage of the monthly fee that grows as compliance drops (a tiered schedule), or a fixed amount for each breach. Either way, the arithmetic is simple, but the details of the clause change the result, so it is worth doing it carefully.</p>
+<h3>1. Measure SLA compliance</h3>
+<p>Start from the period the contract uses, usually a calendar month. Count the SLA cycles measured (for a help desk, often the tickets with a response or resolution target) and the cycles that breached their target. Remove the breaches the contract excludes, such as delays caused by the customer, planned maintenance or force majeure. Compliance is then <code>(total cycles − counted breaches) / total cycles × 100</code>. For an availability SLA, the same logic applies to minutes of uptime instead of tickets.</p>
+<h3>2. Find the applicable credit</h3>
+<p>With a tiered schedule, find the lowest threshold that compliance falls below and apply its percentage to the monthly fee of the affected service. With a per-breach rule, multiply the counted breaches by the agreed amount. Check whether the fee is the whole contract or only the affected service: many clauses apply the credit to the affected component only.</p>
+<h3>3. Apply the cap and the claim rules</h3>
+<p>Almost every SLA caps credits, for example at 20 % or 50 % of the monthly fee. Take the smaller of the computed credit and the cap. Some contracts also require the customer to claim the credit within a set number of days, or say that credits are the sole remedy; the calculator does not check those conditions.</p>
+<h3>Worked example</h3>
+<p>A provider charges 10,000 per month. In October, 400 tickets had an SLA, 28 breached and 4 of those breaches were caused by the customer and are excluded. Counted breaches: 28 − 4 = 24. Compliance: (400 − 24) / 400 = 94.00 %. The contract grants 5 % below 99 %, 10 % below 95 % and 25 % below 90 %, so the 10 % tier applies: 10,000 × 10 % = 1,000. The cap is 20 % of the fee, or 2,000, which is not reached. The credit owed is <strong>1,000.00</strong>. Under a per-breach rule of 50 per breach, the same month would give 24 × 50 = 1,200, still under the cap.</p>
+<p>Two points cause most disagreements: whether excluded breaches are removed from the total or counted as met (this calculator counts them as met), and how amounts are rounded. Read your clause on both before sending a figure to a customer or a provider. If you work in Jira Service Management, the SLA report gives you the met and breached counts per month to enter above. For the conditions set out in your own contract, see the <a href="#audit">€149 SLA audit</a>; for questions, visit <a href="/app/support/">support</a>.</p>
 <h2>FAQ</h2>
 <p><strong>What is an SLA credit?</strong> A contractual reduction of the fee when the provider misses agreed service levels.</p>
 <p><strong>Should excluded cycles reduce the total?</strong> Contracts differ. This calculator treats them as met; check your contract wording.</p>
@@ -180,7 +204,7 @@ Then <code>credit = min(credit, fee × cap % / 100)</code>, rounded half-up to t
 <p><a class="cta" href="https://buy.stripe.com/7sY8wOexPgjidC57IBgfu04">Buy the audit – €149 excl. VAT</a> <a class="cta alt" href="mailto:contact@2jagency.com?subject=SLA%20audit">Or email us</a></p><p class="muted"> The audit is an arithmetic review of the contract wording you provide, not legal advice.</p>
 
 <p class="muted">Made by SLA Credit Lab (contact@2jagency.com). We are also building SLA Credit Lab, a Jira Service Management app that will do this from your real SLA data; it is not yet available on the Atlassian Marketplace. This calculator is free and stands alone. Not legal or financial advice.</p>
-<footer class="muted" style="border-top:1px solid #dfe1e6;margin-top:2rem;padding-top:.8rem">© 2026 SLA Credit Lab · <a href="legal.html">Legal notice / Mentions légales</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms (CGV)</a> · <a href="support.html">Support</a> · <a href="mailto:contact@2jagency.com">contact@2jagency.com</a></footer>
+<footer class="muted" style="border-top:1px solid #dfe1e6;margin-top:2rem;padding-top:.8rem">© 2026 SLA Credit Lab · <a href="legal.html">Legal notice / Mentions légales</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms (CGV)</a> · <a href="support.html">Support</a> · <a href="/app/privacy/">App privacy policy</a> · <a href="/app/support/">App support</a> · <a href="mailto:contact@2jagency.com">contact@2jagency.com</a></footer>
 
 <script>
 function round2(x){return Math.sign(x)*Math.round(Math.abs(x)*100+1e-9)/100;}
